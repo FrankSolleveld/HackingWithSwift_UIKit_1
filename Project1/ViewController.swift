@@ -42,9 +42,8 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
+            vc.listOfPictures = pictures
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-
 }
-

@@ -11,16 +11,20 @@ class DetailViewController: UIViewController {
 
     @IBOutlet var imageView: UIImageView!
     var selectedImage: String?
+    var listOfPictures: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = selectedImage
         navigationItem.largeTitleDisplayMode = .never
 
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
         }
+        
+        guard (listOfPictures != nil) else {
+            return title = "A Beautiful Picture"
+        }
+        setupTitle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,5 +35,14 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.hidesBarsOnTap = false
+    }
+    
+    func setupTitle(){
+        if let picturesAreSet = listOfPictures, let image = selectedImage {
+            let index = listOfPictures?.firstIndex(of: image)
+            if let indexIsSet = index {
+                title = "Picture \(indexIsSet + 1) out of \(picturesAreSet.count)"
+            }
+        }
     }
 }

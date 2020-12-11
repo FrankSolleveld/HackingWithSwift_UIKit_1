@@ -25,6 +25,7 @@ class ViewController: UITableViewController {
                 pictures.append(item)
             }
         }
+        pictures = pictures.sorted(by: {$0 < $1})
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

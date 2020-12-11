@@ -33,13 +33,11 @@ class DetailViewController: UIViewController {
     }
     
     func setupTitle(){
-        guard (listOfPictures?.count != 0) else {
-            return title = "A Beautiful Picture"
-        }
+        guard (listOfPictures?.count != 0) else { return title = "A Beautiful Picture" }
         if let picturesAreSet = listOfPictures, let image = selectedImage {
             let index = listOfPictures?.firstIndex(of: image)
-            if let indexIsSet = index {
-                title = "Picture \(indexIsSet + 1) out of \(picturesAreSet.count)"
+            if let indexIsKnown = index {
+                title = "Picture \(indexIsKnown + 1) out of \(picturesAreSet.count)"
             }
         }
     }

@@ -9,13 +9,18 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    // MARK: -- IBOutlets
     @IBOutlet var imageView: UIImageView!
+    
+    // MARK: -- Custom Variables
     var selectedImage: String?
     var listOfPictures: [String]?
     
+    // MARK: -- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
         }
@@ -32,6 +37,7 @@ class DetailViewController: UIViewController {
         navigationController?.hidesBarsOnTap = false
     }
     
+    // MARK: -- Custom Methods
     func setupTitle(){
         guard (listOfPictures?.count != 0) else { return title = "A Beautiful Picture" }
         if let picturesAreSet = listOfPictures, let image = selectedImage {
@@ -40,5 +46,15 @@ class DetailViewController: UIViewController {
                 title = "Picture \(indexIsKnown + 1) out of \(picturesAreSet.count)"
             }
         }
+    }
+    
+    @objc func shareTapped(){
+        guard let image = imageView.image?.jpegData(compressionQuality: 1) else {
+            print("No Image Found.")
+            return
+        }
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
 }

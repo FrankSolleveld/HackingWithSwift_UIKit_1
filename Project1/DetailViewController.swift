@@ -7,7 +7,6 @@
 
 /*
  CHALLENGE TIME
- - Add the image name to your shared items. activityItems is an array - you can add strings and other things freely.
  - Go back to project 1 and add a bar button item to the main view controller that recommends the app.
  - Go back to project 2 and add a right bar button item that shows their score when tapped.
  */
@@ -56,11 +55,11 @@ class DetailViewController: UIViewController {
     }
     
     @objc func shareTapped(){
-        guard let image = imageView.image?.jpegData(compressionQuality: 1) else {
+        guard let image = imageView.image?.jpegData(compressionQuality: 1), let name = selectedImage else {
             print("No Image Found.")
             return
         }
-        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [image, name], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
     }

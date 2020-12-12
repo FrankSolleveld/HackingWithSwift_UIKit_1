@@ -5,6 +5,13 @@
 //  Created by Frank Solleveld on 09/12/2020.
 //
 
+/*
+ CHALLENGE TIME
+ - Add the image name to your shared items. activityItems is an array - you can add strings and other things freely.
+ - Go back to project 1 and add a bar button item to the main view controller that recommends the app.
+ - Go back to project 2 and add a right bar button item that shows their score when tapped.
+ */
+
 import UIKit
 
 class DetailViewController: UIViewController {
